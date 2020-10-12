@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+  var host = window.location.host;
+    var ws = new WebSocket('ws://'+host+'/ws1');
+   //var $message = $('#message');
+
+     ws.onopen = function(){
+      //$message.attr("class", 'label label-success');
+      //$message.text('open');
+    };
+    ws.onmessage = function(ev){
+      //$message.attr("class", 'label label-info');
+      //$message.hide();
+      //$message.fadeIn("slow");
+      //$message.text('recieved message');
+      var json = JSON.parse(ev.data);
+      
+
+      $('#websocket').text(json.value);
+  };
+   ws.onclose = function(ev){
+      //$message.attr("class", 'label label-important');
+      //$message.text('closed');
+    };
+    ws.onerror = function(ev){
+      //$message.attr("class", 'label label-warning');
+      //$message.text('error occurred');
+    };
+
+
+  
+  </script>
+</head>
+<body>
+  <span id="websocket"></span>
+</body>
+</html>

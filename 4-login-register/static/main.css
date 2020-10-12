@@ -1,0 +1,20 @@
+
+<style>
+body {
+	background:orange;
+}
+div {
+
+	text-align: center; 
+	margin-top:15%; 
+	
+}
+a {
+	text-decoration: none; 
+	text-align: right;
+}
+input {
+	align-items: right;
+	width:10em;
+}
+</style>

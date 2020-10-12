@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> {% block title %} Default title {% end %} </title>
+</head>
+<body style="background-color:#58A3DC;">
+<h1> Jinja2 Template #2 </h1>
+<hr>
+<div style="margin-left:2em;">
+	<h2> Block Test </h2>
+	<ul>
+  		{% for student in students %}
+    		{% block student %}
+      		<li> {{ escape(student['name']) }} (I'm a base.html) </li>
+    		{% end %}
+  		{% end %}
+ 	</ul>
+
+	<hr>
+	<h2> Escape & Linkify Test </h2>
+	<p> Normal(Autoescaping) : {{ linkify_test }} </p>
+	<p> Without escapeing : {% raw linkify_test %} </p>
+	<p> Linkify : {% apply linkify %} {{ linkify_test  }} {% end %} </p>
+	<hr>
+
+	<h2> Html Import Test </h2>
+	<p> import sub.html </p> 
+	<p> {% module Template("sub.html") %} </p>
+</div>
+</body>
+</html>
+

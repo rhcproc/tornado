@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+  $(document).ready(function() {
+  	(function poll(){
+      setTimeout(function() {
+        $.ajax({url:'/second',success:function(jsonResponse){
+	    var objresponse = JSON.parse(jsonResponse);
+		html_text = "";
+		html_text += "<h1 style='text-align:center; margin-top:5em;'>"
+		html_text += objresponse['now']+"</h1>"
+		$("#clockfield").html(html_text);
+		poll();
+	    },
+	    });
+      event.preventDefault();
+      }, 1000);
+    })();
+  });
+  </script>
+</head>
+<body>
+  <span id="clockfield"></span>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/circliful/1.0.2/css/jquery.circliful.min.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/circliful/1.0.2/js/jquery.circliful.min.js"></script>
+  <script>
+  $(document).ready(function() {
+  	(function poll(){
+      setTimeout(function() {
+        $.ajax({url:'/second',success:function(jsonResponse){
+	      var objresponse = JSON.parse(jsonResponse);
+        abc(objresponse);
+		    poll();
+	    },
+	    });
+      event.preventDefault();
+      }, 1000);
+    })();
+  });
+  </script>
+  <script>
+  function abc(response) {
+  //$(document).ready(function(){	
+  $('#demo').empty().circliful({
+  foregroundColor: "#3498DB", // foreground Color
+  backgroundColor: "#eee", // backgroun color
+  pointColor: "none", // fill color of point circle
+  fillColor: 'none', // fill color
+  foregroundBorderWidth: 15, // width of foreground circle border
+  backgroundBorderWidth: 15, // width of background circle border
+  pointSize: 28.5, // Size of point circle
+  fontColor: '#aaa', // font color
+  percent: response['percent'], // from 0 to 100
+  animation: 0, // if the circle should be animated initialy
+  // how fast or slow the animation should be
+  // from 0 to 100
+  animationStep: 5,
+  icon: 'none', // font awesome icon classes
+  iconSize: '20px', // icon size
+  iconColor: '#999', // icon color
+  iconPosition: 'top', // top, bottom, left, right or middle
+  target: 0, // target percentage
+  start: 0, // star percentage
+  showPercent: 1, // show percent
+  percentageTextSize: 22, // font size of the percentage text
+  textAdditionalCss: '', // additonal css for the percentage text
+  targetPercent: 0, // draws a circle around the main circle
+  targetTextSize: 17, // font size of the target percentage 
+  targetColor: '#2980B9', // fill color of the target circle
+  text: null, // info text shown bellow the percentage in the circle  
+  textStyle: null, // css inline style you wanna add to your info text
+  textColor: '#666', // font color of the info text
+  multiPercentage: 0,
+  percentages: null,
+  textBelow: false, // aligns string of "text" property centered below the circle 
+  noPercentageSign: false, // to hide the percentage sign
+  replacePercentageByText: null, // replace the percentage shown in the circle by text
+  halfCircle: false, // draw half circle see example bellow
+  animateInView: false, // animate circle on scroll into view
+  decimals: 0, // number of decimal places to show
+  // shows decimals while animating instead of only at the end or if less than 1
+  alwaysDecimals: false
+  });
+};
+</script>
+</head>
+<body>
+  <div id="demo" style="width:50%;"> </div>
+</body>
+</html>

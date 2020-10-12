@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+  <script>
+  $(document).ready(function()
+  {
+      $('#currentid').keyup(function(event){         
+		  var currentid = $("#currentid").val();
+		  var data = 
+	      { 
+			inputid:currentid
+	      };
+	      var dataToSend = JSON.stringify(data)
+		  $.ajax(
+	 	 {
+	      url:'/idstatus',
+	      type:'POST',
+	      data:dataToSend,
+	      success:function(jsonResponse)
+	      {
+	        var objresponse = JSON.parse(jsonResponse);
+		    $("#responsefield").text(objresponse['message']);
+	      },
+	      error:function()
+	      {
+	        $("#responsefield").text("Error to load api");
+	      }
+	  });
+    event.preventDefault();
+    });
+  });
+  </script>
+</head>
+<body style="text-align:center;margin-top:10%;">
+  <form method="POST" style="margin-bottom:1em;">
+  	<input id="currentid" name="currentid" type="text" style="height:2em; padding-left:1em;" placeholder="ID">
+  	<button type="submit" style="height:2.4em;"> Ok </button>
+  </form>
+  <span id="responsefield"></span>
+</body>
+</html>

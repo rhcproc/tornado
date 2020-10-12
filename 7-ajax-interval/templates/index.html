@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+  $(document).ready(function()
+  {
+      setInterval(function() {
+          var key1 = "sample";
+		  var data = 
+	      { 
+	        key1:key1
+	      };
+	      var dataToSend = JSON.stringify(data)
+		  $.ajax(
+	 	 {
+	      url:'/',
+	      type:'POST',
+	      data:dataToSend,
+	      success:function(jsonResponse)
+	      {
+	        var objresponse = JSON.parse(jsonResponse);
+		  	html_text = "";
+		  	html_text += "<h1 style='text-align:center; margin-top:5em;'>"+objresponse['now']+"</h1>"
+		  	$("#responsefield").html(html_text);
+	      },
+	      error:function()
+	      {
+	        $("#responsefield").text("Error to load api");
+	      }
+	  });
+    event.preventDefault();
+    }, 1000);
+  });
+  </script>
+</head>
+<body>
+  <span id="responsefield"></span>
+</body>
+</html>

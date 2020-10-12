@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    setInterval(function(){
+      var key = "samples";
+      var data = { key : key };
+      var dataToSend = JSON.stringify(data)
+      $.ajax({
+        url : '/',
+        type : 'POST',
+        data : dataToSend,
+        success : function(jsonResponse){
+          jsonResponse = jsonResponse.replace(/}{/gi,"},{");
+          var objresponse = JSON.parse("["+jsonResponse+"]");
+
+          text = ""; 
+          for (i=0; i<objresponse.length; i++){
+            text += "<h4>"+objresponse[i]['name'] 
+            text += ": "+objresponse[i]['counter'] + "%" 
+            text += "<hr width='" + objresponse[i]['counter'] + "%'" 
+            text += "align='left' color="+objresponse[i]['color']+"></h4>"  
+          }
+          $("#responsefield").html(text);
+        },
+        error:function(){
+          $("#responsefield").text("Error to load API");
+        }
+      });
+    event.preventDefault();
+    }, 1000);
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+  $('#counter').click(function(){
+    var key = "counter";
+    var data = {key:key};
+    var dataToSend = JSON.stringify(data)
+    $.ajax({
+      url :'/',
+      type : 'POST',
+      data : dataToSend,
+      success : function(){
+      },
+      error : function(){
+        $("#counter").text("Error to load API");
+      }
+    });
+  });
+  });
+  </script>
+</head>
+<body>
+  <button id="counter"> Add a Counter </button>
+  <div id="responsefield" style="align-content:left;"> </div>
+</body>
+</html>
+        

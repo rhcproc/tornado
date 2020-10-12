@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Tornado User Register</title>
+<link rel="stylesheet" type="text/css" href="{{static_url('main.css')}}"/>
+</head>
+<body style="background:orange;">
+  <form action="/login" method="POST">
+    <h2> Welcome! </h2>
+    <div>
+      <p>Username: <input type="text" name="username"/></p>
+      <p>Password: <input type="password" name="password"/></p>
+      <a><input type="submit" value="Log In" /></a>
+      <a href="/register" ><input type="button" value="Register" /></a>
+      {% module xsrf_form_html() %}
+    </div>
+  </form>
+</body>
+</html>
+

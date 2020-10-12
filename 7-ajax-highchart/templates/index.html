@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+<body >
+<span id="responsefield" style="text-align:center"></span>
+<div id="container" style="width: 70%; height: 400px; margin: 0 auto"></div>
+<script type="text/javascript">
+  function abc(response){
+  var chart = new Highcharts.Chart({
+  chart: {
+    renderTo:'container',
+    //type:'column'
+    //type:'bar'
+    //type:'area'
+    type:'scatter'
+    //type:'bubble'
+    },
+    credits: {},
+    exporting: {},
+    legend: {},
+    title: {},
+    tooltip: {},
+    plotOptions: {
+        series: {
+        }
+    },
+    xAxis: {
+        allowDecimals:false
+    },
+    yAxis: {
+        labels: {
+            formatter:function() {
+                return Math.abs(this.value);
+            }
+        }
+    },
+    series:[{
+        grouping:false,
+        data:response
+    }]		
+});
+}
+</script>
+<script>
+$(document).ready(function()
+{
+  setInterval(function() {       
+  var currentid = $("#currentid").val();
+  var data = 
+  { 
+  inputid:currentid
+	};
+	var dataToSend = JSON.stringify(data)
+	$.ajax(
+	  {
+	    url:'/',
+	    type:'POST',
+	    data:dataToSend,
+	    success:function(jsonResponse)
+	    {
+	     	var objresponse = JSON.parse(jsonResponse);
+	      abc(objresponse['randoms'])     
+	    },
+	    error:function()
+	    {
+	      $("#responsefield").text("Error to load api");
+	    }
+	  });
+    event.preventDefault();
+  }, 3000);
+});
+</script>
+</body>
+</html>

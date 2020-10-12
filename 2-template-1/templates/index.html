@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body style="background-color:#58A3DC;">
+	<h1>Jinja2 Template #1</h1>
+	<hr>
+	<div style="margin-left:2em;">
+		<h2>1) Value Test</h2>
+		<b>get value</b> : {{ ivalue }}
+		<br><br>
+
+		<b>get list</b>: <br>
+		{% for value in ilist %}
+   			<p> {{ value }} </p>
+		{% end %}
+
+		<b>get dict</b> : {{ idict['a'] }}
+		<br><br>
+
+		<b>get dict_list</b> : <br>
+		{% for student in ilistdict %}
+    		<p> {{ student["number"]}} </p>
+		{% end %}
+		<hr>
+		<h2>2) Function Test </h2>
+		<b>Add Function(2,3)</b> : {{ add(2,3) }}
+	</div>
+</body>
+</html>
+
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tornado CryptoJS</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+	<script>
+	$(document).ready(function(){
+    	$("#msg_decrypt").click(function(){
+    		var secret = $('#secret_tag').val();
+		var encrypted = '{{ cipher_info["cipher"] }}';
+		var decrypted = CryptoJS.AES.decrypt(encrypted, secret).toString(CryptoJS.enc.Utf8);
+		var temp = "";
+		temp += "<p>" + decrypted + "</p>"
+		temp += "<a href='/'> <p  style='margin-top:20%;margin-left:45%;padding-left:20%;'>"+"Home</p></a>"
+        $("#msg_decrypt_div").html(temp);
+		});
+	});
+	</script>
+</head>
+<body>
+	<div id="msg_decrypt_div" style="width:40%; margin-left:40%;">
+	<div style="margin-top:2em;  ">
+	<input type="password" id="secret_tag" name="secret" value="" placeholder="Password" style="align:center;  ">
+	</div>
+	<div style="margin-top:1em;">
+	<input id="msg_decrypt" class="button special" type="submit" value="Enter">
+	</div>
+	</div>
+</body>
+</html>
